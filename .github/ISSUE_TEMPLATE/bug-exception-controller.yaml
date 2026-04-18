@@ -1,0 +1,128 @@
+name: Bug Report - Exception Controller
+description: Report a bug related to the Kyverno Exception Controller
+labels: ["bug", "exception-controller", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following before submitting
+      options:
+        - label: I have searched existing issues to ensure this bug has not already been reported
+          required: true
+        - label: I have reproduced the issue on a supported version of Kyverno
+          required: true
+        - label: I have read the documentation
+          required: true
+
+  - type: input
+    id: kyverno-version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      placeholder: e.g. v1.11.0
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes-version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      placeholder: e.g. v1.28.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the bug
+      placeholder: Describe the bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: exception-policy
+    attributes:
+      label: PolicyException Definition
+      description: The PolicyException manifest that is causing the issue
+      render: yaml
+      placeholder: |
+        apiVersion: kyverno.io/v2
+        kind: PolicyException
+        metadata:
+          name: example-exception
+        spec:
+          exceptions:
+            - policyName: example-policy
+              ruleNames:
+                - example-rule
+          match:
+            any:
+              - resources:
+                  kinds:
+                    - Pod
+    validations:
+      required: false
+
+  - type: textarea
+    id: policy
+    attributes:
+      label: Policy Definition
+      description: The Kyverno policy that the exception applies to
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Apply policy '...'
+        2. Apply PolicyException '...'
+        3. Submit resource '...'
+        4. Observe unexpected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: exception-controller-logs
+    attributes:
+      label: Exception Controller Logs
+      description: Relevant logs from the exception controller pod
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other context about the problem (screenshots, environment details, etc.)
+    validations:
+      required: false
