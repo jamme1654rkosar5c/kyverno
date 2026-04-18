@@ -1,0 +1,132 @@
+name: Bug Report - Reports Controller
+description: File a bug report for the Reports Controller component
+labels: ["bug", "triage", "reports-controller"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please verify the following before submitting
+      options:
+        - label: I have searched existing issues to ensure this is not a duplicate
+          required: true
+        - label: I have read the [documentation](https://kyverno.io/docs/)
+          required: true
+        - label: I am using a supported version of Kyverno
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe the bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: Expected behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Actual behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Apply policy '...'
+        2. Create resource '...'
+        3. Check policy report '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy
+    attributes:
+      label: Policy Definition
+      description: The Kyverno policy that is causing the issue (if applicable)
+      render: yaml
+      placeholder: |
+        apiVersion: kyverno.io/v1
+        kind: ClusterPolicy
+        ...
+
+  - type: textarea
+    id: resource
+    attributes:
+      label: Resource Definition
+      description: The Kubernetes resource involved (if applicable)
+      render: yaml
+
+  - type: textarea
+    id: policy_report
+    attributes:
+      label: Policy Report
+      description: The PolicyReport or ClusterPolicyReport output (if applicable)
+      render: yaml
+
+  - type: input
+    id: kyverno_version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      placeholder: e.g. v1.11.0
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes_version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      placeholder: e.g. v1.28.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: Installation Method
+      description: How did you install Kyverno?
+      options:
+        - Helm
+        - YAML manifests
+        - Operator
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Reports Controller Logs
+      description: Relevant logs from the reports controller pod
+      render: shell
+      placeholder: Paste logs here...
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context about the problem (screenshots, related issues, etc.)
