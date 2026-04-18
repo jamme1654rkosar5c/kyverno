@@ -1,0 +1,117 @@
+name: Bug Report - Background Controller
+description: Report a bug related to the Kyverno background controller (generate, mutate existing)
+labels: ["bug", "background-controller", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug in the Kyverno background controller.
+        The background controller handles generate and mutateExisting rules applied to existing resources.
+        Please fill out the sections below to help us diagnose and fix the issue.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Please confirm the following before submitting.
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: I have read the [Kyverno documentation](https://kyverno.io/docs/).
+          required: true
+        - label: I am using a supported version of Kyverno.
+          required: true
+
+  - type: input
+    id: kyverno-version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      placeholder: e.g. v1.11.0
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes-version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      placeholder: e.g. v1.28.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: rule-type
+    attributes:
+      label: Rule Type
+      description: Which rule type is affected?
+      options:
+        - generate
+        - mutateExisting
+        - Both
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy
+    attributes:
+      label: Policy Definition
+      description: Please provide the policy YAML that is causing the issue.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: trigger-resource
+    attributes:
+      label: Trigger Resource
+      description: Provide the resource that triggered the background controller (if applicable).
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened? Include any error messages or unexpected results.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Background Controller Logs
+      description: |
+        Please provide relevant logs from the background controller.
+        You can retrieve them with: `kubectl logs -n kyverno -l app.kubernetes.io/component=background-controller`
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: policy-report
+    attributes:
+      label: Policy Report
+      description: If available, provide the relevant PolicyReport or ClusterPolicyReport.
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other context, screenshots, or information that might help diagnose the issue.
+    validations:
+      required: false
