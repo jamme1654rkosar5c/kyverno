@@ -1,0 +1,108 @@
+name: Bug Report - Policy Controller
+description: Report a bug related to the Kyverno Policy Controller
+labels: [bug, policy-controller]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: pre-checks
+    attributes:
+      label: Pre-checks
+      description: Please confirm the following before submitting
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: I have read the [documentation](https://kyverno.io/docs/)
+          required: true
+
+  - type: input
+    id: kyverno-version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      placeholder: e.g. v1.11.0
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes-version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      placeholder: e.g. v1.28.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: policy-type
+    attributes:
+      label: Policy Type
+      description: What type of policy is affected?
+      options:
+        - ClusterPolicy
+        - Policy
+        - Both
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy-spec
+    attributes:
+      label: Policy Spec
+      description: Please provide the policy YAML that is causing the issue
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Apply policy '...'
+        2. Create resource '...'
+        3. Observe '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Policy Controller Logs
+      description: Relevant logs from the policy controller pod
+      render: shell
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context about the problem (screenshots, related issues, etc.)
