@@ -1,0 +1,118 @@
+name: Bug Report - Generate Controller
+description: File a bug report for the generate controller
+labels: ["bug", "triage", "generate"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: existing-issue
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Apply policy '...'
+        2. Create resource '...'
+        3. Check generated resource '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy
+    attributes:
+      label: Generate Policy
+      description: Please provide the generate policy that is causing the issue.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: trigger-resource
+    attributes:
+      label: Trigger Resource
+      description: Please provide the resource that triggers the generate rule.
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: generated-resource
+    attributes:
+      label: Generated Resource (if any)
+      description: Please provide the resource that was generated (if any).
+      render: yaml
+    validations:
+      required: false
+
+  - type: dropdown
+    id: kyverno-version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      options:
+        - 1.12.x
+        - 1.11.x
+        - 1.10.x
+        - other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: k8s-version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      options:
+        - 1.29.x
+        - 1.28.x
+        - 1.27.x
+        - 1.26.x
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: generate-controller-logs
+    attributes:
+      label: Generate Controller Logs
+      description: Please provide logs from the generate controller pod.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.
+    validations:
+      required: false
