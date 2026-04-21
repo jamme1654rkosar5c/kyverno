@@ -1,0 +1,134 @@
+name: Bug Report - Admission Webhook
+description: Report a bug related to the Kyverno admission webhook
+labels: ["bug", "admission-webhook", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I have searched the existing issues and this is not a duplicate.
+          required: true
+        - label: I have read the [documentation](https://kyverno.io/docs/).
+          required: true
+        - label: I am using a supported version of Kyverno.
+          required: true
+
+  - type: input
+    id: kyverno-version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      placeholder: e.g. v1.12.0
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes-version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      placeholder: e.g. v1.29.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kubernetes-platform
+    attributes:
+      label: Kubernetes Platform
+      description: What Kubernetes platform are you using?
+      options:
+        - EKS
+        - GKE
+        - AKS
+        - OpenShift
+        - Rancher
+        - k3s
+        - kind
+        - minikube
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy
+    attributes:
+      label: Policy
+      description: Please provide the Kyverno policy that is causing the issue.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: resource
+    attributes:
+      label: Resource
+      description: Please provide the Kubernetes resource that triggers the policy.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened and what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Apply policy '...'
+        2. Create resource '...'
+        3. Observe error '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: admission-controller-logs
+    attributes:
+      label: Admission Controller Logs
+      description: |
+        Please provide relevant logs from the Kyverno admission controller.
+        You can retrieve them with: `kubectl logs -n kyverno -l app.kubernetes.io/component=admission-controller`
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: webhook-configuration
+    attributes:
+      label: Webhook Configuration
+      description: |
+        Please provide the current webhook configuration if relevant.
+        You can retrieve it with: `kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations -o yaml`
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+    validations:
+      required: false
