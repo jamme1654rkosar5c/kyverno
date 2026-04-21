@@ -9,13 +9,16 @@ body:
         Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
 
   - type: checkboxes
-    id: checklist
+    id: prerequisites
     attributes:
-      label: Checklist
+      label: Prerequisites
+      description: Please confirm the following before submitting
       options:
-        - label: I have searched for existing issues.
+        - label: I have searched existing issues and this is not a duplicate
           required: true
-        - label: I have read the [documentation](https://kyverno.io/docs/).
+        - label: I have read the documentation
+          required: true
+        - label: I am using a supported version of Kyverno
           required: true
 
   - type: input
@@ -23,7 +26,7 @@ body:
     attributes:
       label: Kyverno Version
       description: What version of Kyverno are you running?
-      placeholder: e.g. v1.11.0
+      placeholder: e.g., v1.12.0
     validations:
       required: true
 
@@ -32,54 +35,57 @@ body:
     attributes:
       label: Kubernetes Version
       description: What version of Kubernetes are you running?
-      placeholder: e.g. v1.28.0
+      placeholder: e.g., v1.28.0
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: A clear and concise description of the bug.
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+      placeholder: Describe the bug...
     validations:
       required: true
 
   - type: textarea
     id: policy
     attributes:
-      label: Policy
-      description: Provide the Kyverno policy YAML that is causing the issue.
+      label: Kyverno Policy
+      description: Please provide the Kyverno policy YAML that is causing the issue
       render: yaml
+      placeholder: |
+        apiVersion: kyverno.io/v1
+        kind: ClusterPolicy
+        metadata:
+          name: ...
+        spec:
+          ...
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: resource
     attributes:
-      label: Resource
-      description: Provide the Kubernetes resource YAML with the TTL label/annotation.
+      label: Resource with TTL Label/Annotation
+      description: Please provide the resource YAML that has the TTL label or annotation
       render: yaml
+      placeholder: |
+        apiVersion: v1
+        kind: ...
+        metadata:
+          name: ...
+          labels:
+            cleanup.kyverno.io/ttl: ...
     validations:
       required: false
-
-  - type: textarea
-    id: steps
-    attributes:
-      label: Steps to Reproduce
-      description: Steps to reproduce the behavior.
-      placeholder: |
-        1. Apply policy '...'
-        2. Create resource with TTL label '...'
-        3. Wait for TTL to expire
-        4. Observe behavior
-    validations:
-      required: true
 
   - type: textarea
     id: expected
     attributes:
       label: Expected Behavior
       description: What did you expect to happen?
+      placeholder: The resource should be deleted after the TTL expires...
     validations:
       required: true
 
@@ -88,6 +94,20 @@ body:
     attributes:
       label: Actual Behavior
       description: What actually happened?
+      placeholder: The resource was not deleted / was deleted too early...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Apply the policy...
+        2. Create a resource with TTL label...
+        3. Wait for TTL to expire...
+        4. Observe that...
     validations:
       required: true
 
@@ -95,8 +115,9 @@ body:
     id: logs
     attributes:
       label: TTL Controller Logs
-      description: Provide relevant logs from the TTL controller pod.
+      description: Please provide relevant logs from the TTL controller
       render: shell
+      placeholder: Paste TTL controller logs here...
     validations:
       required: false
 
@@ -104,6 +125,7 @@ body:
     id: additional
     attributes:
       label: Additional Context
-      description: Add any other context about the problem here.
+      description: Add any other context about the problem here
+      placeholder: Any additional information...
     validations:
       required: false
