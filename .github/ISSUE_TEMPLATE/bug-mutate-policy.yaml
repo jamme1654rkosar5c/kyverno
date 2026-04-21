@@ -1,0 +1,138 @@
+name: Bug Report - Mutate Policy
+description: Report a bug related to mutate policies
+labels: [bug, triage, mutate]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: existing-issue
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behavior
+      description: A concise description of what you're experiencing.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A concise description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy
+    attributes:
+      label: Mutate Policy
+      description: Please provide the mutate policy YAML.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: resource
+    attributes:
+      label: Resource
+      description: Please provide the resource YAML that the policy is applied to.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-mutated-resource
+    attributes:
+      label: Expected Mutated Resource
+      description: Please provide the expected mutated resource YAML.
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: actual-mutated-resource
+    attributes:
+      label: Actual Mutated Resource
+      description: Please provide the actual mutated resource YAML (if available).
+      render: yaml
+    validations:
+      required: false
+
+  - type: dropdown
+    id: mutate-type
+    attributes:
+      label: Mutate Type
+      description: What type of mutation is the policy performing?
+      options:
+        - patch strategic merge
+        - patch (JSON 6902)
+        - mutateExistingResources
+        - foreach
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Apply policy '...'
+        2. Create resource '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        Please provide the following information:
+        - Kyverno version
+        - Kubernetes version
+        - Cloud provider / platform
+      value: |
+        - Kyverno version:
+        - Kubernetes version:
+        - Cloud provider / platform:
+    validations:
+      required: true
+
+  - type: textarea
+    id: kyverno-logs
+    attributes:
+      label: Kyverno Logs
+      description: Please provide relevant Kyverno logs.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: policy-report
+    attributes:
+      label: Policy Report
+      description: Please provide relevant policy report output if available.
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.
+    validations:
+      required: false
