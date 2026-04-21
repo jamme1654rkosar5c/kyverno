@@ -1,0 +1,123 @@
+name: Bug Report - Cleanup Policy
+description: Report a bug related to Kyverno cleanup policies
+labels: ["bug", "cleanup-policy", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I have searched the existing issues and this is not a duplicate.
+          required: true
+        - label: I have read the [documentation](https://kyverno.io/docs/).
+          required: true
+
+  - type: input
+    id: kyverno-version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      placeholder: e.g. v1.11.0
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes-version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      placeholder: e.g. v1.28.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: Installation Method
+      description: How was Kyverno installed?
+      options:
+        - Helm
+        - YAML manifests
+        - Kustomize
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: cleanup-policy
+    attributes:
+      label: Cleanup Policy
+      description: Paste the CleanupPolicy or ClusterCleanupPolicy resource YAML here.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: target-resource
+    attributes:
+      label: Target Resource
+      description: Paste an example of the resource that should be cleaned up (or is being incorrectly cleaned up).
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened? Include any error messages or unexpected behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Provide step-by-step instructions to reproduce the issue.
+      placeholder: |
+        1. Apply the cleanup policy...
+        2. Create the target resource...
+        3. Wait for the scheduled cleanup...
+        4. Observe the behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: cleanup-controller-logs
+    attributes:
+      label: Cleanup Controller Logs
+      description: Paste relevant logs from the Kyverno cleanup controller pod.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: policy-report
+    attributes:
+      label: Policy Report
+      description: Paste any relevant PolicyReport or ClusterPolicyReport output.
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or information about the problem here.
+    validations:
+      required: false
