@@ -1,0 +1,181 @@
+name: Bug Report - Validate Policy
+description: Report a bug related to validate policies in Kyverno
+labels: ["bug", "validate", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! Please fill out the form below to help us investigate the issue.
+        Before submitting, please search existing issues to avoid duplicates.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Please confirm the following before submitting your bug report.
+      options:
+        - label: I have searched the existing issues and this is not a duplicate.
+          required: true
+        - label: I have read the [documentation](https://kyverno.io/docs/).
+          required: true
+        - label: I am using a supported version of Kyverno.
+          required: true
+
+  - type: input
+    id: kyverno-version
+    attributes:
+      label: Kyverno Version
+      description: What version of Kyverno are you running?
+      placeholder: e.g., v1.12.0
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes-version
+    attributes:
+      label: Kubernetes Version
+      description: What version of Kubernetes are you running?
+      placeholder: e.g., v1.28.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installation-method
+    attributes:
+      label: Installation Method
+      description: How was Kyverno installed?
+      options:
+        - Helm
+        - YAML manifests
+        - Kustomize
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy
+    attributes:
+      label: Validate Policy
+      description: Please provide the validate policy that is causing the issue.
+      render: yaml
+      placeholder: |
+        apiVersion: kyverno.io/v1
+        kind: ClusterPolicy
+        metadata:
+          name: example-validate-policy
+        spec:
+          rules:
+            - name: validate-rule
+              match:
+                any:
+                - resources:
+                    kinds:
+                      - Pod
+              validate:
+                message: "Validation failed"
+                pattern:
+                  spec:
+                    containers:
+                    - image: "?*:*"
+    validations:
+      required: true
+
+  - type: textarea
+    id: resource
+    attributes:
+      label: Resource Under Test
+      description: Please provide the resource that is being validated.
+      render: yaml
+      placeholder: |
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: example-pod
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:latest
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: The policy should have blocked/allowed the resource because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened? Please include any error messages or logs.
+      placeholder: Instead, the policy allowed/blocked the resource and the following error was observed...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: validate-type
+    attributes:
+      label: Validate Rule Type
+      description: What type of validate rule are you using?
+      options:
+        - Pattern
+        - CEL
+        - Deny
+        - AnyPattern
+        - Assert (JMESPath)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: policy-scope
+    attributes:
+      label: Policy Scope
+      description: What is the scope of the policy?
+      options:
+        - ClusterPolicy
+        - Policy (namespaced)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: enforcement-action
+    attributes:
+      label: Enforcement Action
+      description: What enforcement action is configured for the policy?
+      options:
+        - Enforce
+        - Audit
+        - Warn
+    validations:
+      required: true
+
+  - type: textarea
+    id: policy-report
+    attributes:
+      label: Policy Report
+      description: If available, please provide the relevant PolicyReport or ClusterPolicyReport.
+      render: yaml
+      placeholder: |
+        apiVersion: wgpolicyk8s.io/v1alpha2
+        kind: PolicyReport
+        ...
+
+  - type: textarea
+    id: kyverno-logs
+    attributes:
+      label: Kyverno Logs
+      description: Please provide relevant logs from the Kyverno admission controller or background controller.
+      render: shell
+      placeholder: Paste relevant log output here...
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here, such as related policies, webhook configurations, or environment details.
